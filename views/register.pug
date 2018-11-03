@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 Register
+    form(method='POST', action='/register')
+        #form-group
+            lebel Username:
+            input.form-control(name='username', type='text')
+            lebel Email:
+            input.form-control(name='email', type='text')
+            lebel Password:
+            input.form-control(name='password', type='password')
+            lebel Re-Password:
+            input.form-control(name='password2', type='password')
+            br
+            input.btn.btn-primary(type='submit' value='Submit')

@@ -1,0 +1,72 @@
+extends layout
+
+block content
+    .container.form__root
+    p.p__font Set up your cleaning service
+    h6 Chose your cleaning schedule
+    p you can always change frequencies, schedule, or save cleaning for late!
+    .frequence
+        .freq Monthly
+        .freq Biweekly
+        .freq Weekly
+    h2 Order
+    form(method='POST', action='/orders/')
+        input(type='hidden' id='frequency__value' name='frequency' value='')
+        .form-row
+            .form-group.col-md-6
+                label(for='firstName') First Name
+                input#firstName.form-control(type='text' name='firstname' placeholder='First Name' required)
+            .form-group.col-md-6
+                label(for='lastName') Last Name
+                input#lastName.form-control(type='text' name='lastname' placeholder='Last Name' required)
+        .form-row
+            .form-group.col-md-6
+                label(for='email') Email
+                input#email.form-control(type='text' name='email' placeholder='Email')
+            .form-group.col-md-6
+                label(for='phone') Phone
+                input#phone.form-control(type='text' name='phone' placeholder='Phone' required)
+        .form-row
+            .form-group.col-md-6
+                label(for='house') House
+                input#house.form-control(type='text' name='address.house' placeholder='House' required)
+            .form-group.col-md-6
+                label(for='flat') Flat
+                input#flat.form-control(type='text' name='address.flat' placeholder='Flat' required)
+        .form-row
+            .form-group.col-md-6
+                label(for='road') Road
+                input#road.form-control(type='text' name='address.road' placeholder='Road' required)
+            .form-group.col-md-6
+                label(for='area') Area
+                input#area.form-control(type='text' name='address.area' placeholder='Area' required)
+        .form-row
+            .form-group.col-md-6
+                label(for='zipcode') ZipCode
+                input#zipcode.form-control(type='text' name='address.zipCode' placeholder='ZipCode' required)
+            .form-group.col-md-6
+                label(for='reachmedium') How did you hear about us?
+                input#reachmedium.form-control(type='text' name='reach_medium' placeholder='How did you hear about us?')
+        .form-group
+            label(for='promocode') Promo Code
+            input#promocode.form-control.col-md-6(type='text' name='promo_code' placeholder='Promo code')
+        button.btn.btn-primary Submit
+
+    script.
+        let arr = document.querySelectorAll(".freq")
+        for (i = 0; i < arr.length; i++) {
+            arr[i].addEventListener('click', frequencyGetData)
+        }
+        function frequencyChangeColor() {
+            let freqActiveColor = document.getElementsByClassName('freq')
+            for (i = 0; i < freqActiveColor.length; i++) {
+                freqActiveColor[i].style.background = '#ffffff'
+                freqActiveColor[i].style.color = '#000000'
+            }
+        }
+        function frequencyGetData(e) {
+            frequencyChangeColor()
+            document.getElementById('frequency__value').value = e.target.innerHTML
+            e.target.style.background = "#35C36F"
+            e.target.style.color = "#ffffff"
+        }

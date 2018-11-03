@@ -1,0 +1,94 @@
+extends layout
+
+block content
+    .root
+        h3= title
+        ul.list__parent
+            li.list__items
+                span.item__key Id
+                b :
+                span.item__value #{order._id}
+            li.list__items
+                span.item__key FirstName
+                b :
+                span #{order.firstname}
+            li.list__items
+                span.item__key LastName
+                b :
+                span #{order.lastname}
+            li.list__items
+                span.item__key Frequency
+                b :
+                span #{order.frequency}
+            li.list__items
+                span.item__key Email
+                b :
+                span #{order.email}
+            li.list__items
+                span.item__key Phone
+                b :
+                span #{order.phone}
+            li.list__items
+                span.item__key Address
+                b :
+                span #{ order.address.house}, #{order.address.flat}, #{order.address.road}, #{order.address.area}, #{order.address.zipCode}
+            li.list__items
+                span.item__key Reach_Medium
+                b :
+                span #{order.reach_medium}
+            li.list__items
+                span.item__key Promo_code
+                b :
+                span #{order.promo_code}
+
+        .button__style
+            a.btn.btn-primary(href='/orders/' + order._id + '/edit') Edit
+            a.btn.btn-danger(href='/orders/' + order._id + '/cancle') Cancle
+
+
+
+
+
+
+
+
+    //h1= title
+    //table.table.table-bordered
+    //    thead
+    //        tr
+    //            th(scope='col') #ID
+    //            th(scope='col') Frequency
+    //            th(scope='col') Firstname
+    //            th(scope='col') Lastname
+    //            th(scope='col') Email
+    //            th(scope='col') Phone
+    //            th(scope='col') Address
+    //            th(scope='col') Reach medium
+    //            th(scope='col') Promo code
+    //            th(scope='col') Action
+    //    tbody
+    //        tr
+    //            td
+    //                a(href='/orders/' + order._id) #{order._id}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.frequency}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.firstname}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.lastname}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.email}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.phone}
+    //            td
+    //                a(href='/orders/' + order._id) #{ order.address.house}, #{order.address.flat}, #{order.address.road}, #{order.address.area}, #{order.address.zipCode}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.reach_medium}
+    //            td
+    //                a(href='/orders/' + order._id) #{order.promo_code}
+    //            td
+    //                a.btn.btn-primary(href='/orders/' + order._id + '/edit') Edit
+    //                br
+    //                br
+    //                a.btn.btn-danger(href='/orders/' + order._id + '/cancle') Cancle
+

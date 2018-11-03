@@ -1,0 +1,136 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/*=====================================for order form====================*/
+
+.form__root{
+    background-color: #fff;
+}
+
+.p__font{
+    font-size: 1.5em;
+}
+.frequence{
+    display: flex;
+    justify-content: space-between;
+}
+.frequence div {
+    display: flex;
+    border: 2px solid lightgray;
+    padding: 2%;
+    border-radius: 5px;
+    width: 18vw;
+    justify-content: center;
+    align-items: center;
+}
+.frequence div:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px #35C36F;
+}
+@media(max-width: 400px) {
+    #list__group {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+    }
+    .frequence{
+        display: flex;
+        flex-direction: column;
+    }
+    .frequence div {
+        width: 80vw;
+        margin: 1%;
+    }
+}
+
+/*=====================================for single order====================*/
+.root{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+  width: 60%;
+  height: 75vh;
+  margin-left: calc(50% - 30%);
+  margin-top: calc(50vh - 45vh);
+  border-radius: 10px;
+  box-shadow: 0 0 10px;
+  font-size: 100%;
+}
+
+#list__parent{
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.list__items{
+  display: flex;
+  margin-bottom: 10px;
+}
+@media(max-width: 780px){
+  .root{
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+    height: 100vh;
+  }
+}
+.item__key {
+  flex-basis: 33%;
+  text-align: left;
+}
+.item__value{
+  flex-basis: 33%;
+  text-align: left;
+}
+b{
+  flex-basis: 33%;
+  text-align: left
+}
+@media(max-width: 450px){
+  .item__value{
+    padding-left: 5px;
+  }
+  b{
+    flex-basis: 0%;
+    text-align: left;
+  }
+}
+#edit__button{
+  width: 80px
+}
+#delete__button{
+  width: 80px
+}
+
+/*=====================================for pagination====================*/
+.pagination {
+    display: flex;
+    align-items: center;
+    background: white;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.pagination__next {
+    flex: 0 0 auto;
+    padding: 1rem 3rem 1rem 1rem;
+}
+.pagination__next a:after {
+    margin-left: 1rem;
+    content: '→';
+}
+.pagination__prev {
+    flex: 0 0 auto;
+    padding: 1rem 1rem 1rem 3rem;
+}
+.pagination__prev a:before {
+    margin-right: 1rem;
+    content: '←';
+}
+.pagination__text {
+    flex: 3 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+

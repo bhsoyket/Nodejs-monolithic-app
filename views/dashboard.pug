@@ -1,0 +1,52 @@
+extends layout
+
+block content
+    h1= title
+    if orders.length === 0
+        h1 Order List Is Empty.
+    else
+        .container
+            table.table.table-striped.table-bordered
+                thead.thead-dark
+                    tr
+                        th(scope='col') #ID
+                        th(scope='col') Frequency
+                        th(scope='col') First Name
+                        th(scope='col') Last Name
+                        th(scope='col') Email
+                        th(scope='col') Phone
+                        th(scope='col') Address
+                        th(scope='col') Reach Medium
+                        th(scope='col') Promo Code
+                tbody
+                    each order in orders
+                        tr
+                            td
+                                a(href='/orders/' + order._id) #{order._id}
+                            td
+                                a(href='/orders/' + order._id) #{order.frequency}
+                            td
+                                a(href='/orders/' + order._id) #{order.firstname}
+                            td
+                                a(href='/orders/' + order._id) #{order.lastname}
+                            td
+                                a(href='/orders/' + order._id) #{order.email}
+                            td
+                                a(href='/orders/' + order._id) #{order.phone}
+                            td
+                                a(href='/orders/' + order._id) #{ order.address.house}, #{order.address.flat}, #{order.address.road}, #{order.address.area}, #{order.address.zipCode}
+                            td
+                                a(href='/orders/' + order._id) #{order.reach_medium}
+                            td
+                                a(href='/orders/' + order._id) #{order.promo_code}
+
+        .pagination
+            .pagination__prev
+                if page > 1
+                    a(href=`/orders/page/${page - 1}`) Prev&nbsp;
+            .pagination__text
+                p Page #{page} of #{pages} - #{count} total orders
+            .pagination__next
+                if  page < pages
+                    a(href=`/orders/page/${parseFloat(page) + 1}`) &nbsp;Next
+
