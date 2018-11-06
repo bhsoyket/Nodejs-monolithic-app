@@ -9,9 +9,11 @@ block content
         .freq Monthly
         .freq Biweekly
         .freq Weekly
-    h2 Order
+    //h2 Order
     form(method='POST', action='/orders/')
         input(type='hidden' id='frequency__value' name='frequency' value='')
+        input(type='hidden' id='otp' name='otp' value='')
+        input(type='hidden' id='otpexpire' name='otpexpire' value='')
         .form-row
             .form-group.col-md-6
                 label(for='firstName') First Name
@@ -39,7 +41,10 @@ block content
                 input#road.form-control(type='text' name='address.road' placeholder='Road' required)
             .form-group.col-md-6
                 label(for='area') Area
-                input#area.form-control(type='text' name='address.area' placeholder='Area' required)
+                select#area.form-control(name='address.area')
+                    option Select your area
+                    each area in areas
+                        option(value=area)= area
         .form-row
             .form-group.col-md-6
                 label(for='zipcode') ZipCode

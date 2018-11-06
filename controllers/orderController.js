@@ -1,21 +1,78 @@
 const mongoose = require('mongoose');
 const { isEmpty } = require('lodash');
+const {showAreas} = require('../handlers/helpers');
+const otpGenerator = require('otp-generator');
+const axios = require('axios');
 
 
 const Order = mongoose.model('Order');
 
 
 exports.createOrders = async (req, res) => {
-    console.log(req.body);
+    let otpData = await sendOtp(req.body.phone);
+    req.body.otp = otpData.otp;
+    req.body.otpexpire = otpData.otpexpire;
     const order = await (new Order(req.body)).save();
     if (!order) {
         req.flash('danger', 'Order creation failed');
         res.redirect(`/orders`);
     }
-    req.flash('success', 'Order successfuly created');
-    res.redirect(`/orders`);
+    req.flash('success', 'Otp send successfully.');
+    res.render('orderverify', { title: 'Order verification' , otpData});
 };
 
+sendOtp = async (phone) => {
+    const otpOptions = { upperCase: false, alphabets: false, specialChars: false };
+    const otp = otpGenerator.generate(6, otpOptions);
+    const userOtpExpires = Date.now() + 3600000;
+
+    const otpInfo = {
+        phone: phone,
+        otp: otp,
+        otpexpire: userOtpExpires
+    };
+
+    await axios({
+        method: 'post',
+        url: process.env.OTP_SEND_URI,
+        headers: { Authorization: process.env.OTP_AUTH, 'Content-Type': 'application/json' },
+        data: {
+            from: 'HandyMama',
+            to: phone,
+            text: `Your OTP is ${otp}`,
+        },
+    });
+    return otpInfo;
+};
+
+exports.verifyOrder = async (req, res) => {
+    const order = await Order.findOne({
+        phone: req.params.phone,
+        otp: req.body.otp,
+        otpexpire: { $gt: Date.now() },
+    });
+
+    if (!order) {
+        req.flash('danger', 'Otp did\'t match.');
+        res.render('orderverify');
+    }
+    order.otp = undefined;
+    order.otpexpire = undefined;
+    await order.save();
+    req.flash('success', 'Your order is verified successfully.');
+    res.redirect(`/`);
+};
+
+exports.otpResend = async (req, res) => {
+    const sendotp = sendOtp(req.params.phone);
+    if (!sendotp){
+        req.flash('danger', 'Otp resend not successfully.');
+        res.render('orderverify', { title: 'Order verification'});
+    }
+    const otpData = {phone: req.params.phone};
+    req.flash('success', 'Otp resend successfully.');
+    res.render('orderverify', { title: 'Order verification', otpData});
+};
 
 exports.getOrders = async (req, res) => {
     const page = req.params.page || 1;
@@ -71,7 +128,6 @@ exports.getOrderById = async (req, res) => {
         req.flash('danger', 'Orders not found');
         res.redirect(`/orders`);
     }
-
     res.render('order', { title: 'Order' , order});
 };
 
@@ -83,7 +139,8 @@ exports.getOrderEditById = async (req, res) => {
         res.redirect(`/orders`);
     }
 
-    res.render('editorder', { title: 'Edit Order',  order});
+    let areas = showAreas();
+    res.render('editorder', { title: 'Edit Order',  order, areas});
 };
 
 
@@ -135,27 +192,5 @@ exports.removeOrderById = async (req, res) => {
             res.redirect('/dashboard');
         }
     });
-
-    // let query = {_id: req.params.id};
-    // Order.findById(req.params.id, (err) => {
-    //     if(err){
-    //         req.flash('danger', 'Order not found');
-    //         res.redirect(`/orders/`);
-    //         res.end();
-    //     }
-    //     Order.remove(query, (err) => {
-    //         if(err){
-    //             req.flash('danger', 'Order not deleted');
-    //             res.redirect(`/orders/`);
-    //             res.end();
-    //         }else{
-    //             req.flash('success', 'order successfully deleted');
-    //             res.redirect('/orders/');
-    //             res.end();
-    //         }
-    //     });
-    // });
 };
-
-
 

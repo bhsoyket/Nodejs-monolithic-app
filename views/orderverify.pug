@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .root_login
+        h1= title
+        p= 'Enter the otp we send your phone number.'
+        form.login__form(method='POST', action='/orders/verify/'+ otpData.phone)
+            input.form-control(name='otp', type='text' placeholder='Put your otp')
+            br
+            button#login__btn.btn.btn-primary Verify Order
+        a.btn.btn-primary(href='/orders/sendotp/'+ otpData.phone) Send otp again

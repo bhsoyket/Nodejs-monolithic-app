@@ -7,19 +7,25 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Wellcome To Service App' });
+  res.render('index', { title: 'Wellcome' });
 });
 
 /* GET admin page. */
 router.get('/dashboard', ensureAuthenticated, catchErrors(orderController.getOrders));
 router.get('/orders/page/:page', catchErrors(orderController.getOrders));
 
+// Get user profile
+router.get('/profile/:id', ensureAuthenticated, catchErrors(userController.getProfile));
+
+// Change password
+router.post('/profile/:id', ensureAuthenticated, catchErrors(userController.changePassdord));
+
 //register form
 router.get('/register', ensureAuthenticated, (req, res) => {
     res.render('register');
 });
 // register proccess
-router.post('/register', userController.userRegistation);
+router.post('/register', ensureAuthenticated, userController.userRegistation);
 
 /* GET login page. */
 router.get('/login', function(req, res, next) {

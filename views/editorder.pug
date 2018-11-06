@@ -9,7 +9,6 @@ block content
         .freq Monthly
         .freq Biweekly
         .freq Weekly
-    h2 Order
     form(method='POST', action='/orders/')
         input(type='hidden' id='frequency__value' name='frequency' value=order.frequency)
         .form-row
@@ -39,7 +38,10 @@ block content
                 input#road.form-control(type='text' name='address.road' value=order.address.road required)
             .form-group.col-md-6
                 label(for='area') Area
-                input#area.form-control(type='text' name='address.area' value=order.address.area required)
+                select#area.form-control(name='address.area')
+                    option(value=order.address.area)= order.address.area
+                    each area in areas
+                        option(value=area)= area
         .form-row
             .form-group.col-md-6
                 label(for='zipcode') ZipCode

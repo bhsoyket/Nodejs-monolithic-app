@@ -40,7 +40,8 @@ exports.userRegistation = async (req, res) => {
                 newUser.save((err)=>{
                     if (err){
                         console.log(err);
-                        return;
+                        req.flash('danger', err.message);
+                        res.redirect('/register')
                     } else {
                         req.flash('success', 'You are registered and can log in.');
                         res.redirect('/login');
@@ -48,5 +49,43 @@ exports.userRegistation = async (req, res) => {
                 });
             });
         });
+    }
+};
+
+exports.getProfile = async (req, res) => {
+    const user = await User.findOne({ _id: req.params.id }, { __v: 0, password: 0});
+    if (!user) {
+        req.flash('danger', 'User not found');
+        res.redirect(`/dashboard`);
+    }
+    res.render('userprofile', { title: 'Profile', user });
+};
+
+exports.changePassdord = async (req, res) => {
+    let user = await User.findOne({ _id: req.params.id }, { __v: 0});
+    // console.log(req.body, user.password);
+    const checkpassword = bcrypt.compareSync(req.body.current_pass, user.password);
+    if(checkpassword && req.body.change_pass === req.body.confirm_pass){
+
+        bcrypt.genSalt(10, (err, salt)=>{
+            bcrypt.hash(req.body.change_pass, salt, (err,hash)=>{
+                if (err){
+                    console.log(err);
+                }
+                user.update({ $set: { password: hash }}, (err)=>{
+                    if (err){
+                        console.log(err);
+                        req.flash('danger', err.message);
+                        res.redirect('/profile/' + user._id)
+                    } else {
+                        req.flash('success', 'Password change successfully');
+                        res.redirect('/profile/' + user._id);
+                    }
+                });
+            });
+        });
+    }else {
+        req.flash('danger', 'Password Invalid');
+        res.redirect('/profile/' + user._id);
     }
 };

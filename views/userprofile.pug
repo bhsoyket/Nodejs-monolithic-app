@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .root
+        h3= title
+        ul.list__parent
+            li.list__items
+                span.item__key UserName
+                b :
+                span.item__value #{user.username}
+            li.list__items
+                span.item__key Email
+                b :
+                span #{user.email}
+        form.user__form(method='POST', action='/profile/' + user._id)
+
+            label.l(for='current_pass') Current Password
+            input#current_pass.form-control(type='password' name='current_pass' placeholder='Current Password' required)
+
+            label.l(for='change_pass') Change Password
+            input#change_pass.form-control(type='password' name='change_pass' placeholder='Change Password' required)
+
+            label.l(for='confirm_pass') Confirm Password
+            input#confirm_pass.center-block.form-control(type='password' name='confirm_pass' placeholder='Confirm Password' required)
+            button#user__btn.btn.btn-primary Change Password

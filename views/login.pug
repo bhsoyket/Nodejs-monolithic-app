@@ -1,13 +1,13 @@
 extends layout
 
 block content
-    h1 Login
-    form(method='POST', action='/login')
-        #form-group
-            lebel Username:
+    .root_login
+        h1 Login
+        form.login__form(method='POST', action='/login')
+            lebel.l_login Username
             input.form-control(name='username', type='text')
-            lebel Password:
+            lebel.l_login Password
             input.form-control(name='password', type='password')
             br
-            input.btn.btn-primary(type='submit' value='Login')
+            button#login__btn.btn.btn-primary Login
 

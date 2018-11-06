@@ -10,10 +10,12 @@ body {
 
 .p__font{
     font-size: 1.5em;
+    margin-top: 2%;
 }
 .frequence{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 2%;
 }
 .frequence div {
     display: flex;
@@ -134,3 +136,77 @@ b{
     text-align: center;
 }
 
+/*=====================================for user profile====================*/
+.user__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-left: calc(50% - 40%);
+}
+
+#user__btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+.l{
+    margin-top: 2%;
+}
+
+/*=====================================for user login====================*/
+.login__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin-left: calc(50% - 35%);
+}
+
+#login__btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+.l_login{
+    margin: 2%;
+}
+.root_login{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-evenly;
+    width: 60%;
+    height: 55vh;
+    margin-left: calc(50% - 30%);
+    margin-top: calc(50vh - 40vh);
+    border-radius: 10px;
+    box-shadow: 0 0 10px;
+    font-size: 100%;
+}
+
+@media(max-width: 780px){
+    .root_login{
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+        height: 100vh;
+    }
+}
+
+/*=====================================for index page====================*/
+.service-features{
+    display: flex;
+    line-height: 2;
+}
+.icon__margin{
+    margin-right: 2%;
+    line-height: 2;
+    color: #35C36F;
+}
+span{
+    font-weight: 700;
+    color: #35C36F;
+}

@@ -4,8 +4,8 @@
 
 
 exports.validateOrder = (req, res, next) => {
-    // req.sanitizeBody('frequency');
-    // req.checkBody('frequency', 'Please enter a frequency').notEmpty();
+    req.sanitizeBody('frequency');
+    req.checkBody('frequency', 'Please enter a frequency').notEmpty();
     req.sanitizeBody('firstname');
     req.checkBody('firstname', 'Please enter a firstname').notEmpty();
     req.sanitizeBody('lastname');

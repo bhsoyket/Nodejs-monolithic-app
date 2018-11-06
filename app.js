@@ -3,14 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const paginate = require('express-paginate');
 const passport = require('passport');
-// const mongo = require('mongodb');
 const mongoose = require('mongoose');
+const {createAdminUser} = require('./handlers/helpers');
 
 require('dotenv').config();
 
@@ -21,9 +20,13 @@ mongoose.Promise = global.Promise;
 require('./models/User');
 require('./models/Order');
 
+
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const ordersRouter = require('./routes/orders');
+
+createAdminUser();
 
 const app = express();
 

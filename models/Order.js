@@ -32,6 +32,7 @@ const orderSchema = new Schema({
         type: String,
         trim: true,
         required: 'Enter your phone number',
+        match: [/(\+88)?01[35-9]\d{8}/, 'Invalid phone number']
     },
     address: {
         house: {
@@ -70,6 +71,16 @@ const orderSchema = new Schema({
         trim: true,
     },
     status: {
+        type: String,
+        lowercase: true,
+        trim: true,
+    },
+    otp: {
+        type: String,
+        lowercase: true,
+        trim: true,
+    },
+    otpexpire: {
         type: String,
         lowercase: true,
         trim: true,
