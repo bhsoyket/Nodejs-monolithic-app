@@ -20,7 +20,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.3.9",
+    "mongoose": "^5.7.5",
     "mongoose-mongodb-errors": "0.0.2",
     "mongoose-unique-validator": "^2.0.2",
     "morgan": "~1.9.0",
