@@ -13,7 +13,7 @@
     "debug": "~2.6.9",
     "dotenv": "^6.1.0",
     "es6-promisify": "^6.0.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-flash": "0.0.2",
     "express-messages": "^1.0.1",
     "express-paginate": "^1.0.0",
